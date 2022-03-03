@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ASPMVCProjektSklep.Models.Category>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<h2>Kategorie</h2>
+
+<a class="btn btn-info" style="color:white ; margin-bottom:10px" href="@Url.Action("Create","Category")">
+    Utwórz
+</a>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+    </td>
+    <td>
+        @if (item.status == "active")
+        {
+            @Html.ActionLink("Ukryj", "Hide", new { id = item.Id })
+        }
+        else
+        {
+            @Html.ActionLink("Aktywuj", "Activate", new { id = item.Id })
+        }     
+    </td>
+</tr>
+}
+
+</table>

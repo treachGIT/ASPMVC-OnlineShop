@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Twój koszyk</h2>
+
+<style>
+    .panel {
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+</style>
+
+
+
+@{
+    int iterator = 0;
+}
+
+<div class="row">
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md-3">
+        <p>Nazwa:</p>
+    </div>
+
+    <div class="col-md-2">
+        <p>Ilość:</p>
+    </div>
+
+    <div class="col-md-2">
+        <p>Cena:</p>
+    </div>
+
+    <div class="col-md-2">
+
+    </div>
+</div>
+
+@foreach (var product in ViewBag.productIDs)
+{
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-3">
+                    @if (ViewBag.photos[iterator] == "~/Images/noimage.png")
+                    {
+                        <p><img src="~/Images/noimage.png" width="100" /> </p>
+                    }
+                    else
+                    {
+                        <p><img src="@ViewBag.photos[iterator]" width="100" /> </p>
+                    }
+
+                </div>
+
+                <div class="col-md-3">
+                    <p><a href="@Url.Action("Show", "Product", new { id = ViewBag.productIDs[iterator] })">@ViewBag.productNames[iterator]</a></p>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="row">
+                        <a class="col-md-2 btn btn-danger" href="@Url.Action("MinusFromCart","Cart", new { id = ViewBag.productIDs[iterator] })" style="color: white; text-decoration: none;">
+                            -
+                        </a>
+                        <div class="col-md-3 text-center center-block">
+                            <p class="">@ViewBag.quantities[iterator]</p>
+                        </div>
+                        <a class="col-md-2 btn btn-info" href="@Url.Action("AddToCart","Cart", new { id = ViewBag.productIDs[iterator] })" style="color: white; text-decoration: none;">
+                            +
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-2">
+                    <p>@ViewBag.prices[iterator].ToString("0.00") zł</p>
+                </div>
+
+                <div class="col-md-2">
+                    <p><a class="btn btn-danger" href="@Url.Action("RemoveFromCart", "Cart", new { id = ViewBag.productIDs[iterator] })">Usuń</a></p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    iterator++;
+}
+
+<div class="row">
+    <div class="col-md-8">
+
+    </div>
+    <div class="col-md-2">
+        <p>Suma:</p>
+    </div>
+    <div class="col-md-2">
+        <p>@ViewBag.amount zł</p>
+        <p><a class="btn btn-success" href="@Url.Action("Create","Order")">Złóż zamówienie</a></p>
+    </div>
+</div>

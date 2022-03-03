@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ASPMVCProjektSklep.Models.Adress>
+
+@{
+    ViewBag.Title = "ShowAdresses";
+
+
+}
+
+<h2>Twoje adresy</h2>
+
+@foreach (var adress in Model)
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p>Miasto: @adress.city</p>
+            <p>Ulica: @adress.street</p>
+            @if (adress.apartment.Length > 0)
+            {
+                <p>
+                    Budynek:
+                    @adress.building / @adress.apartment
+                </p>
+
+            }
+            else
+            {
+                <p>
+                    Budynek:
+                    @adress.building
+                </p>
+            }
+            <p>Kod pocztowy: @adress.postalCode</p>
+
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3">    <a href="@Url.Action("Delete","Adress", new { id = @adress.Id })" class="btn btn-danger pull-right" role="button">Usuń adres</a></div>
+            </div>
+
+
+        </div>
+    </div>
+}

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ASPMVCProjektSklep.Models.Product>
+
+@{
+    ViewBag.Title = "ShowList";
+}
+
+
+<h2>Produkty</h2>
+
+<hr />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="row">
+                <h4>Sortuj</h4>
+
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        @ViewBag.currentSort
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="@Url.Action("SetSort","Product", new { id = 1 })">Popularność: od najpopularniejszych</a></li>
+                        <li><a href="@Url.Action("SetSort","Product", new { id = 2 })">Cena: od najtańszych</a></li>
+                        <li><a href="@Url.Action("SetSort","Product", new { id = 3 })">Cena: od najdroższych</a></li>
+                        <li><a href="@Url.Action("SetSort","Product", new { id = 4 })">Nazwa: A-Z</a></li>
+                    </ul>
+                </div>
+
+                <hr class="col-sm-8" />
+            </div>
+            <div class="row">
+                @{
+                    Html.RenderAction("ShowFilters", "Product");
+                }
+
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+            @{var products = Model.ToList();
+                int iterator = 0;
+            }
+            @for (int i = 0; i < 3; i++)
+            {
+                <div class="row">
+                    @for (int j = 0; j < 3; j++)
+                    {
+                        <div class="col-sm-4">
+                            @{
+                                if (iterator < products.Count)
+                                {
+                                    Html.RenderAction("ProductCard", "Product", new { id = products[iterator].Id });
+                                }
+                                iterator++;
+                            }
+                        </div>
+                    }
+                </div>
+            }
+
+
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination pull-right">
+                    <li>
+                        @if (ViewBag.currentPage > 1)
+                        {
+                            <a href="@Url.Action("ShowList", "Product", new { id = ViewBag.currentPage - 1 })" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        }
+                    </li>
+
+                    @for (int i = 1; i <= @ViewBag.pageCount; i++)
+                    {
+                        if (i == ViewBag.currentPage)
+                        {
+                            <li class="active"><a href="@Url.Action("ShowList", "Product", new { id = i })">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("ShowList", "Product", new { id = i })">@i</a></li>
+                        }
+                    }
+
+                    <li>
+                        @if (ViewBag.currentPage < ViewBag.pageCount)
+                        {
+                            <a href="@Url.Action("ShowList", "Product", new { id = ViewBag.currentPage + 1 })" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        }
+                    </li>
+
+                </ul>
+            </nav>
+
+
+        </div>
+    </div>
+</div>
+
+

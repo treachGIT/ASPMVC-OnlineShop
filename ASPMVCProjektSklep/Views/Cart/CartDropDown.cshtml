@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "CartDropDown";
+}
+
+
+<a href="@Url.Action("Show", "Cart")" role="button" aria-haspopup="true" aria-expanded="false">
+    <span>Koszyk</span>
+    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+    <span class="badge">@ViewBag.NumberOfItems</span>
+</a>

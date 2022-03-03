@@ -1,0 +1,40 @@
+﻿@model ASPMVCProjektSklep.Models.IndexViewModel
+@{
+    ViewBag.Title = "Zarządzaj";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Zmień ustawienia konta</h4>
+    <hr />
+    <dl class="col-md-6">
+        <dt>Hasło:</dt>
+        <dd>
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Zmień hasło", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Utwórz", "SetPassword")
+            }
+            ]
+        </dd>
+        <a href="@Url.Action("OrderHistory","Order")" class="btn btn-success" style="margin-top:20px" role="button">Historia zamówień</a>
+    </dl>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @{
+                    Html.RenderAction("ShowAdresses", "Adress");
+                }
+
+                <a href="@Url.Action("Create","Adress")" class="btn btn-info pull-right" role="button">Dodaj nowy adres</a>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ASPMVCProjektSklep.Models.Sale>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    ViewBag.Title = "ShowList";
+    int iterator = 0;
+}
+
+<h2>Przeceny @ViewBag.productName (ID = @ViewBag.productID)</h2>
+
+<a class="btn btn-info" style="color:white; margin-bottom:12px;" href="@Url.Action("Create","Sale", new { id = ViewBag.productID })">
+    Utwórz
+</a>
+<table class="table">
+    <tr>
+        <th>
+            <p>ID</p>
+        </th>
+        <th>
+            <p>Zniżka</p>
+        </th>
+        <th>
+            <p>Data rozpoczęcia</p>
+        </th>
+        <th>
+            <p>Data zakończenia</p>
+        </th>
+        <th>
+            <p>Liczba sprzedanych produktów</p>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)%
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endDate)
+            </td>
+            <td>
+                <p>@ViewBag.saleQuantity[iterator]</p>
+            </td>
+            <td>
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+        iterator++;
+    }
+
+</table>
+
+
+<a href="@Url.Action("Index", "Product")">Powrót</a>

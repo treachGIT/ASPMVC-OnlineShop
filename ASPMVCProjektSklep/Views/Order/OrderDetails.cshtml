@@ -1,0 +1,49 @@
+﻿@model ASPMVCProjektSklep.Models.Order
+
+@{
+    ViewBag.Title = "OrderDetails";
+    float amount = 0;
+}
+
+<h2>Szczegóły zamówienia</h2>
+
+@foreach (var item in Model.OrderProducts)
+{
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-4">
+                    <p>Nazwa: @item.Product.Name</p>
+                </div>
+
+                <div class="col-md-4">
+                    <p>Ilość: @item.Quantity</p>
+                </div>
+
+                <div class="col-md-4">
+                    <p>Cena: @item.Price.ToString("0.00") zł</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    amount += @item.Price;
+}
+
+
+
+<div class="row">
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-2">
+        <p>Suma:</p>
+    </div>
+    <div class="col-md-2">
+        <p>@amount.ToString("0.00") zł</p>
+
+    </div>
+</div>
+
+<a href="@Url.Action("RestartOrderProducts","Order", new { id = Model.Id})" class="btn btn-success" style="margin-top:20px" role="button">Ponów zamówienie</a>

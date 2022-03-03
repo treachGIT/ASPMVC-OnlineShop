@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ASPMVCProjektSklep.Models.Image>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "ShowList";
+}
+
+<h2>Zdjęcia @ViewBag.productName (ID = @ViewBag.productID)</h2>
+
+<a class="btn btn-info" style="color:white; margin-bottom:12px;" href="@Url.Action("Create","Image", new { id = ViewBag.productID })">
+    Utwórz
+</a>
+<table class="table">
+    <tr>
+        <th>
+            <p>ID</p>
+        </th>
+        <th>
+            <p>Tytuł</p>
+        </th>
+        <th>
+            <p>Źródło</p>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<a href="@Url.Action("Index", "Product")">Powrót</a>

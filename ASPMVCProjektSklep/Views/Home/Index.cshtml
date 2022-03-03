@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .jumbotron {
+        background-image: url('../../Images/baner4.png');
+        background-size: cover;
+        margin-top: 7px;
+    }
+</style>
+
+<div class="jumbotron">
+    <h1>Zapraszamy</h1>
+    <p class="lead">Posiadamy szeroką ofertę produktów elektronicznych</p>
+    <p><a href="@Url.Action("ShowList", "Product", new { id = 1 })" class="btn btn-primary btn-lg">Przeglądaj produkty &raquo;</a></p>
+</div>
+
+
+@if (ViewBag.mostPopular.Count != 0)
+{
+    <h2>Najczęściej kupowane</h2>
+    <div class="row">
+        @foreach (var item in ViewBag.mostPopular)
+        {
+            <div class="col-md-3">
+                @{
+                    Html.RenderAction("ProductCard", "Product", new { id = item });
+                }
+            </div>
+        }
+    </div>
+}
+
+@if (ViewBag.bestSale.Count != 0)
+{
+    <h2>Najlepsza przecena</h2>
+    <div class="row">
+        @foreach (var item in ViewBag.bestSale)
+        {
+            <div class="col-md-3">
+                @{
+                    Html.RenderAction("ProductCard", "Product", new { id = item });
+                }
+            </div>
+        }
+    </div>
+}
+
+
+@if (ViewBag.news.Count != 0)
+{
+    <h2>Nowości</h2>
+    <div class="row">
+        @foreach (var item in ViewBag.news)
+        {
+            <div class="col-md-3">
+                @{
+                    Html.RenderAction("ProductCard", "Product", new { id = item });
+                }
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,6 @@
+﻿@model IEnumerable<ASPMVCProjektSklep.Models.Category>
+
+@foreach (var item in Model)
+{
+    <li><a href="@Url.Action("ShowListByCategory", "Product", new { categoryId = @item.Id , @id = 1}  )">@item.Name</a></li>
+}

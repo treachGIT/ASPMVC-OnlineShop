@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ASPMVCProjektSklep.Models.Order>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<h2>Zamówienia</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <p>ID</p>
+        </th>
+        <th>
+            <p>Data</p>
+        </th>
+        <th>
+            <p>Status</p>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            @if (item.status == "nowe")
+            {
+                <td>
+                    @Html.ActionLink("Zmień status na w trakcie realizacji", "ChangeStatusToInProgress", new { id = item.Id }) |
+                    @Html.ActionLink("Anuluj zamówienie", "Delete", new { id = item.Id })
+                </td>
+            }
+            @if (item.status == "w trakcie realizacji")
+            {
+                <td>
+                    @Html.ActionLink("Zmień status na zrealizowane", "ChangeStatusToRealized", new { id = item.Id }) |
+                </td>
+            }
+            else
+            {
+                <td>
+                </td>
+            }
+        </tr>
+    }
+
+</table>

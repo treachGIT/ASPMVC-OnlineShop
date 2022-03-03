@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<h2>Użytkownicy</h2>
+
+<table class="table">
+
+
+    <tr>
+        <th>
+            <p>Email</p>
+        </th>
+        <th>
+            <p>Rola</p>
+        </th>
+        <th></th>
+    </tr>
+
+    @for (int i = 0; i < ViewBag.len; i++)
+    {
+        <tr>
+            <td>
+                <p>@ViewBag.userNames[i]</p>
+            </td>
+            <td>
+                <p>@ViewBag.userRoles[i]</p>
+            </td>
+            <td>
+                @if (ViewBag.userRoles[i] == "User")
+                {
+                    @Html.ActionLink("Daj uprawnienia admina", "MakeAdmin", new { name = ViewBag.userNames[i] })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

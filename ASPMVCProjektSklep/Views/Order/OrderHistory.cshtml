@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ASPMVCProjektSklep.Models.Order>
+
+@{
+    ViewBag.Title = "ShowUserOrders";
+}
+
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+    }
+</style>
+
+<h2>Moje zamówienia</h2>
+
+<div class="row">
+    <div class="col-md-12">
+
+        @foreach (var order in Model)
+        {
+            <div class="row">
+                <a href="@Url.Action("OrderDetails", "Order", new { id = order.Id})">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="col-md-4">  
+                                <p>Nr zamówienia: @order.Id</p>
+                            </div>              
+                            <div class="col-md-4">
+                                <p>Data:  @order.Date</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Status:  @order.status</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+        }
+    </div>
+</div>

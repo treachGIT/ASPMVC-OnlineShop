@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "ShowFilters";
+}
+
+<h4>Filtruj</h4>
+
+@using (Html.BeginForm("ShowFilters", "Product"))
+{
+
+
+    <h5>Promocja:</h5><div class="input-group">
+
+        <div class="checkbox">
+            <label>
+                @if (ViewBag.sale == "true")
+                {
+                    <input type="checkbox" name="onSale" checked>
+                }
+                else
+                {
+                    <input type="checkbox" name="onSale">
+                }
+                przecenione
+            </label>
+        </div>
+    </div>
+
+
+    <h5>Cena:</h5>
+
+    <div class="form-group">
+
+        <div class="input-group col-md-6">
+            <div class="input-group-addon">od</div>
+            <input type="number" step="0.01" class="form-control" name="startPrice" value="@ViewBag.startP">
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+
+        <div class="input-group col-md-6">
+            <div class="input-group-addon">do</div>
+            <input type="number" step="0.01" class="form-control" name="endPrice" value="@ViewBag.endP">
+
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filtruj</button>
+}
+
+<a class="btn btn-default" href="@Url.Action("ResetFilters","Product")" style="margin-top:10px">Zresetuj filtry</a>
+
+
+
